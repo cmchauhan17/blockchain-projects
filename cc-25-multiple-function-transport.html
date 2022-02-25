@@ -1,0 +1,368 @@
+<html>
+    <body>
+        <div>
+            <p>OrgName:</p> <input type="text" id="OrgName">
+            <p>noOfVehicles:</p> <input type="text" id="noOfVehicles">
+            <p>avgDistance:</p> <input type="text" id="avgDistance">
+            <p>orgVehicleWeight:</p> <input type="text" id="orgVehicleWeight">
+            <p>orgCargoWeight:</p> <input type="text" id="orgCargoWeight">
+			<label for="freight">Select Mode of Transport:</label>
+			<select name="freight" id="transportationMode">
+				<option value="road">Road</option>
+				<option value="rail">Rail</option>
+				<option value="air">Air</option>
+			</select>
+
+			<button id="submit1">Submit1</button>
+			<br><br>
+
+            <p>Name:</p> <input type="text" id="name">
+            <p>Number1:</p> <input type="text" id="number1">
+            <p>Number2:</p> <input type="text" id="number2">
+            <label for="freight">Select Mode of Transport:</label>
+			<select name="freight" id="transportationMode1">
+				<option value="road">Road</option>
+				<option value="rail">Rail</option>
+				<option value="air">Air</option>
+			</select>
+            <br><br>
+
+
+            
+            <button id="submit2">Submit 2</button>
+
+            <button><p id="balance">Get Carbon Credit Value</p></button>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.36/dist/web3.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin=""anonymous"></script>
+    
+        <script>
+            var contract;
+            var WEB3;
+
+
+            $('#balance').click(function(){
+                
+                WEB3 = new Web3(web3.currentProvider);
+
+                var address = "0x8249081B3ff6EF764E0702d5382Cf03e5cB48e48"
+
+                var abi = [
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "name",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "orgName",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "orgCargoWeight",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "noOfVehicles",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "carbonCreditValue",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_orgName",
+				"type": "string"
+			},
+			{
+				"name": "_transportationMode",
+				"type": "string"
+			},
+			{
+				"name": "_noOfVehicles",
+				"type": "uint32"
+			},
+			{
+				"name": "_avgDistance",
+				"type": "uint32"
+			},
+			{
+				"name": "_orgVehicleWeight",
+				"type": "uint32"
+			},
+			{
+				"name": "_orgCargoWeight",
+				"type": "uint32"
+			}
+		],
+		"name": "inputDetails",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "avgDistance",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "result",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "number2",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "number1",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "transportationMode1",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "transportationMode",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "orgVehicleWeight",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getCarbonCredits",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_name",
+				"type": "string"
+			},
+			{
+				"name": "_number1",
+				"type": "uint32"
+			},
+			{
+				"name": "_number2",
+				"type": "uint32"
+			},
+			{
+				"name": "_transportationMode1",
+				"type": "string"
+			}
+		],
+		"name": "inputBasics",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}
+];
+
+                contract = new WEB3.eth.Contract(abi, address);
+
+                contract.methods.getCarbonCredits().call().then(function(bal){
+                    $('#balance').html(bal);
+                })
+            })
+
+            $('#submit1').click(function(){
+     
+                var OrgName = document.getElementById("OrgName").value;
+				var transportationMode = document.getElementById("transportationMode").value;
+                noOfVehicles = parseInt($('#noOfVehicles').val());
+                avgDistance = parseInt($('#avgDistance').val());
+                orgVehicleWeight = parseInt($('#orgVehicleWeight').val());
+                orgCargoWeight = parseInt($('#orgCargoWeight').val());
+
+				var name = document.getElementById("name").value;  
+				number1 = parseInt($('#number1').val());
+                number2 = parseInt($('#number2').val());
+				var transportationMode1 = document.getElementById("transportationMode1").value;   
+
+				WEB3.eth.getAccounts().then(function(accounts){
+                    var acc = accounts[0];
+                    return contract.methods.inputDetails(OrgName, transportationMode, noOfVehicles, avgDistance, orgVehicleWeight, orgCargoWeight).send({from: acc});
+                }).then(function(tx){
+                    console.log(tx);
+                }).catch(function(tx){
+                    console.log(tx);
+                })
+            })
+
+			$('#submit2').click(function(){
+     
+				var OrgName = document.getElementById("OrgName").value;
+				var transportationMode = document.getElementById("transportationMode").value;
+				noOfVehicles = parseInt($('#noOfVehicles').val());
+				avgDistance = parseInt($('#avgDistance').val());
+				orgVehicleWeight = parseInt($('#orgVehicleWeight').val());
+				orgCargoWeight = parseInt($('#orgCargoWeight').val());
+
+				var name = document.getElementById("name").value;  
+				number1 = parseInt($('#number1').val());
+				number2 = parseInt($('#number2').val());
+				var transportationMode1 = document.getElementById("transportationMode1").value;   
+
+				WEB3.eth.getAccounts().then(function(accounts){
+					var acc = accounts[0];
+					return contract.methods.inputBasics(name, number1, number2, transportationMode1).send({from: acc});
+				}).then(function(tx){
+					console.log(tx);
+				}).catch(function(tx){
+					console.log(tx);
+				})
+			})
+
+/*
+            $('#withdraw').click(function(){
+                var amt = 0;
+                amt = parseInt($('#amount').val());
+
+                web3.eth.getAccounts().then(function(accounts){
+                    var acc = accounts[0];
+                    return contract.methods.withdraw(amt).send({from: acc});
+                }).then(function(tx){
+                    console.log(tx);
+                }).catch(function(tx){
+                    console.log(tx);
+                })
+            }) */
+        </script>
+    
+    </body>
+</html>
