@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="newUI.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+    <title>Add Carbon Data</title>
+</head>
+<body>
+    <div class="container-fluid px-1 py-5 mx-auto">
+        <div class="row d-flex justify-content-center">
+            <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
+				<div class="row justify-content-end">
+					<div class="form-group col-sm-6"> <a href="dashboard.html"><button class="btn-block btn-danger"><p style="font-size:20px">Home</p></button></a> </div>
+					<div class="form-group col-sm-6"> <a href="login.html"><button class="btn-block btn-danger"><p style="font-size:20px">Logout</p></button></a> </div>
+				</div>
+                <h3>Calculate Carbon Credits</h3>
+                <p class="blue-text">Enter the following details<br> to get the carbon credits consumed.</p>
+                <div class="card">
+                    <!--Organisation's Name-->
+                    <h5 class="text-center mb-4">Organisation Name</h5>
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group flex-column d-flex"> <label class="form-control-label px-3">Enter Organisation's Name<span class="text-danger"> *</span></label> <input type="text" id="organisationName" name="organisationName" placeholder="Organisation Name" onblur="validate(1)"> </div>
+                    </div>
+                    <br>
+                    <hr>
+
+                    <!--Sourcing/Procurement-->
+                    <h5 class="text-center mb-4">Sourcing/Procurement</h5>
+                    <form class="form-card" onsubmit="event.preventDefault()">
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Enter the total distance covered<span class="text-danger"> *</span></label> <input type="text" id="distanceCovered" name="distanceCovered" placeholder="Enter in kilometers" onblur="validate(1)"> </div>
+                            <div class="dropdown col-sm-6 flex-column d-flex">Enter mode of transport
+
+							<select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="transportationMode">
+								<option selected>Select Mode of Transport</option>
+								<option value = "road">Road</option>
+                                <option value = "rail">Rail</option>
+                                <option value = "air">Air</option>
+							</select>
+                                <!-- <button class=" dropdown-toggle form-group" type="button" data-toggle="dropdown">Mode of transport</button>
+                                <select class="dropdown-menu text-center" id="transportationMode">
+                                  <option value = "road">Road</option>
+                                  <option value = "rail">Rail</option>
+                                  <option value = "air">Air</option>
+								</select> -->
+                            </div>
+                        </div>
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Enter weight of vehicle<span class="text-danger"> *</span></label> <input type="text" id="vehicleWeight" name="vehicleWeight" placeholder="" onblur="validate(3)"> </div>
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Number of vehicles<span class="text-danger"> *</span></label> <input type="text" id="numberOfVehicles" name="numberOfVehicles" placeholder="" onblur="validate(4)"> </div>
+                        </div>
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Weight of cargo<span class="text-danger"> *</span></label> <input type="text" id="cargoWeight" name="cargoWeight" placeholder="" onblur="validate(5)"> </div>
+                        </div>
+                        <div class="row justify-content-end">
+                            <div class="form-group col-sm-6"> <button type="submit" id="submit1" class="btn-block btn-primary">Submit</button> </div>
+                        </div>
+                    </form>
+                    <!-- <br><br> -->
+                    <hr>
+                   
+                    <!--Electricity Consumed--> 
+                    <h5 class="text-center mb-4">Electricity Consumption</h5>
+                    <form class="form-card" onsubmit="event.preventDefault()">
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Units of Electricity consumed<span class="text-danger"> *</span></label> <input type="text" id="unitsOfElectricity" name="unitsOfElectricity" placeholder="Enter in kiloWatt" onblur="validate(1)"> </div>
+                            <div class="dropdown col-sm-6 flex-column d-flex" onblur="validate(2)">Type of Energy
+
+								<select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="typeOfEnergy">
+									<option selected>Select Type of Energy</option>
+									<option value = "renewable">Renewable</option>
+									<option value = "non-renewable">Non Renewable</option>
+								</select>
+                                <!-- <button class=" dropdown-toggle form-group" type="button" data-toggle="dropdown">Select Energy Type
+                                <span class="caret"></span></button>
+                                <ul class="dropdown-menu text-center" id="typeOfEnergy">
+                                  <li value = "renewable">Renewable</li>
+                                  <li value = "non-renewable">Non Renewable</li>
+                                </ul> -->
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-end">
+                            <div class="form-group col-sm-6"> <button type="submit" id="submit2" class="btn-block btn-primary">Submit</button> </div>
+                        </div>
+                    </form>
+                    <br><br>
+                    <hr>
+
+                    <!--Employee Commute-->
+                    <h5 class="text-center mb-4">Employee Commute</h5>
+                    <form class="form-card" onsubmit="event.preventDefault()">
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Purpose of Travel<span class="text-danger"> *</span></label> <input type="text" id="typeOfTravel" name="typeOfTravel" placeholder="" onblur="validate(1)"> </div>
+                            <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Select mode of transport<span class="text-danger"> *</span></label> <input type="text" id="modeOfTransportInComumute" name="modeOfTransportInComumute" placeholder="" onblur="validate(2)"> </div> -->
+                            <div class="dropdown col-sm-6 flex-column d-flex" onblur="validate(2)">Mode of Transport
+
+								<select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="modeOfTransportInComumute">
+									<option selected>Select Mode of Transport in Commute</option>
+									<option value = "air">Air</option>
+                                  	<option value = "rail">Rail</option>
+                                  	<option value = "road">Road</option>
+								</select>
+
+                                <!-- <button class=" dropdown-toggle form-group" type="button" data-toggle="dropdown">
+                                <span class="caret">Select Mode</span></button>
+                                <ul class="dropdown-menu text-center" id="modeOfTransportInComumute">
+                                  <li value = "air">Air</li>
+                                  <li value = "rail">Rail</li>
+                                  <li value = "road">Road</li>
+                                </ul> -->
+                            </div>
+                        </div>
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Total distance travelled<span class="text-danger"> *</span></label> <input type="text" id="totalDistanceTravelled" name="totalDistanceTravelled" placeholder="Distance in kilometers" onblur="validate(3)"> </div>
+							<div class="row justify-content-end">
+                            <div class="form-group col-sm-6"> <button type="submit" id="submit3" class="btn-block btn-primary">Submit</button> </div>
+                        </div>
+                    </form>
+                    <br><br>
+                    <hr>
+                    
+                    <!--Product Transport-->
+                    <h5 class="text-center mb-4">Product Transport</h5>
+                    <form class="form-card" onsubmit="event.preventDefault()">
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Enter distance travelled<span class="text-danger"> *</span></label> <input type="text" id="enterTotalDistanceCovered" name="enterTotalDistanceCovered" placeholder="Enter distance in kilometers" onblur="validate(1)"> </div>
+                            <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Select Mode of transport<span class="text-danger"> *</span></label> <input type="text" id="modeOfTransportInProduct" name="modeOfTransportInProduct" placeholder="" onblur="validate(2)"> </div> -->
+                            <div class="dropdown col-sm-6 flex-column d-flex" onblur="validate(2)">Mode of Transport
+
+								<select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="modeOfTransportInProduct">
+									<option selected>Select Mode of Transport</option>
+									<option value = "air">Air</option>
+                                  	<option value = "rail">Rail</option>
+                                  	<option value = "road">Road</option>
+								</select>
+
+                                <!-- <button class=" dropdown-toggle form-group" type="button" data-toggle="dropdown">
+                                <span class="caret">Select Mode</span></button>
+                                <ul class="dropdown-menu text-center" id="modeOfTransportInProduct">
+                                    <li value = "air">Air</li>
+                                    <li value = "rail">Rail</li>
+                                    <li value = "road">Road</li>
+                                </ul> -->
+                            </div>
+                        </div>
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Enter weight of vehicle<span class="text-danger"> *</span></label> <input type="text" id="weightOfVehiclesInProduct" name="weightOfVehiclesInProduct" placeholder="Weight in kilograms" onblur="validate(3)"> </div>
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Weight of Cargo<span class="text-danger"> *</span></label> <input type="text" id="weightOfCargoInProduct" name="weightOfCargoInProduct" placeholder="Weight in kilograms" onblur="validate(4)"> </div>
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Number of vehicles<span class="text-danger"> *</span></label> <input type="text" id="noOfVehiclesInProduct" name="noOfVehiclesInProduct" placeholder="" onblur="validate(4)"> </div>                                                
+						</div>
+                        <div class="row justify-content-end">
+                            <div class="form-group col-sm-6"> <button type="submit" id="submit4" class="btn-block btn-primary">Submit</button> </div>
+                        </div>
+                    </form>
+                    <br><br>
+                    <hr>
+                    
+                    <!--Purchased Gases-->
+                    <h5 class="text-center mb-4">Purchased Gases</h5>
+                    <form class="form-card" onsubmit="event.preventDefault()">
+                        <div class="row justify-content-between text-left">
+                            <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Type of gas purchased <span class="text-danger"> *</span></label> <input type="text" id="typeOfGasPurchased" name="typeOfGasPurchased" placeholder="" onblur="validate(1)"> </div> -->
+                            <div class="dropdown col-sm-6 flex-column d-flex" onblur="validate(2)">Type of gas purchased
+
+								<select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="typeOfGasPurchased">
+									<option selected>Select Gas Purchased</option>
+									<option value = "co2">CO2</option>
+                                    <option value = "ch4">CH4</option>
+                                    <option value = "n20">N2O</option>
+                                    <option value = "sf6">SF6</option>
+								</select>
+
+                                <!-- <button class=" dropdown-toggle form-group" type="button" data-toggle="dropdown">
+                                <span class="caret">Select Gas Purchased</span></button>
+                                <ul class="dropdown-menu text-center" id="typeOfGasPurchased">
+                                    <li value = "co2">CO2</li>
+                                    <li value = "ch4">CH4</li>
+                                    <li value = "n20">N2O</li>
+                                    <li value = "sf6">SF6</li>
+                                </ul> -->
+                            </div>
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Enter quantity purchased<span class="text-danger"> *</span></label> <input type="text" id="enterQuantityPurchasedInGases" name="enterQuantityPurchasedInGases" placeholder="Enter quantity in kilograms" onblur="validate(2)"> </div>
+                        </div>
+                        <div class="row justify-content-end">
+                            <div class="form-group col-sm-6"> <button type="submit" id="submit5" class="btn-block btn-primary">Submit</button> </div>
+                        </div>
+                    </form>
+                    <br><br>
+                    <hr>
+                    
+                    <!--GreenPower Offset-->
+                    <h5 class="text-center mb-4">GreenPower Offset</h5>
+                    <form class="form-card" onsubmit="event.preventDefault()">
+                        <div class="row justify-content-between text-left">
+                            <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Select type of power used<span class="text-danger"> *</span></label> <input type="text" id="typeOfPowerUsed" name="typeOfPowerUsed" placeholder="" onblur="validate(1)"> </div> -->
+                            <div class="dropdown col-sm-6 flex-column d-flex" onblur="validate(2)">Renewable Energy Type
+
+								<select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="typeOfPowerUsed">
+									<option selected>Select Energy Type</option>
+									<option value = "wind">Wind</option>
+                                  	<option value = "solar">Solar</option>
+                                  	<option value = "tidal">Tidal</option>
+                                  	<option value = "hydro">Hydro</option>
+								</select>
+
+                                <!-- <button class=" dropdown-toggle form-group" type="button" data-toggle="dropdown">
+                                <span class="caret">Select Energy Type</span></button>
+                                <ul class="dropdown-menu text-center" id="typeOfPowerUsed">
+                                  <li value = "wind">Wind</li>
+                                  <li value = "solar">Solar</li>
+                                  <li value = "tidal">Tidal</li>
+                                  <li value = "hydro">Hydro</li>
+                                </ul> -->
+                            </div>
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Enter carbon credits purchased<span class="text-danger"> *</span></label> <input type="text" id="purchasedQuantityOfCredit" name="purchasedQuantityOfCredit" placeholder="" onblur="validate(2)"> </div>
+                        </div>
+                        <div class="row justify-content-end">
+                            <div class="form-group col-sm-6"> <button type="submit" id="submit6" class="btn-block btn-primary">Submit</button> </div>
+                        </div>
+                    </form>
+                    <br><br>
+                    <hr>
+
+                    <!--Get Carbon Credit-->
+
+                    <div class="row justify-content-center">
+                        <div class="form-group col-sm-6"> <button type="submit" id="balance" class="btn-block btn-success">Get Carbon Credits Consumed</button> </div>
+                        <p id ="carboncreditsconsumed"></p>
+                    </div>
+					<div class="row justify-content-center">
+                        <div class="form-group col-sm-6"> <button type="button" onclick="location.href='/verification.html'" class="btn-block btn-success">Verifiy Data from Blockchain</button> </div>
+                    </div>
+                    <br><br>
+                    <div class="row justify-content-center">
+                        <div class="form-group col-sm-6"><button type="button" onclick="location.href='/certificate.html'" id="certificate" class="btn-block btn-info">Get certificate</button></div>
+                    </div>
+                    <br><br>
+                    <div class="row justify-content-center">
+                        <div class="form-group col-sm-12"> 
+                            <button type="submit" id="submit123" class="btn-block btn-warning">Get owner address</button>
+							<p id="owneraddress1"></p>
+                            <button type="submit" id="submit456" class="btn-block btn-warning">Get owner balance </button>
+							<p id="ownerbalance1"></p>
+                            <button type="submit" id="submit7" class="btn-block btn-warning">Get contract address</button>
+							<p id="getcontractaddress1"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+	<script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.36/dist/web3.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
+
+    <script>
+        var contract;
+        var WEB3;
+    
+    $(document).ready(function(){
+    
+        WEB3 = new Web3(web3.currentProvider);
+    
+            var address = "0xd7BDDD525947577Ab9a0946cE2C4A7451AFFFC6B"
+    
+            var abi = [
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "enterQuantityPurchasedInGases",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "purchasedQuantityOfCredit1",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "enterTotalDistanceCovered",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_typeOfTravel",
+				"type": "string"
+			},
+			{
+				"name": "_modeOfTransportInComumute",
+				"type": "string"
+			},
+			{
+				"name": "_totalDistanceTravelled",
+				"type": "uint32"
+			}
+		],
+		"name": "input_EmployeeComm",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "cargoWeight",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "typeOfGasPurchased1",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "typeOfEnergy",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "enterTotalDistanceCovered1",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "weightOfVehiclesInProduct",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "enterQuantityPurchasedInGases1",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "CCValue_ProductTrans",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "modeOfTransportInComumute",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "cargoWeight1",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "modeOfTransportInProduct1",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "typeOfTravel1",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_organisationName",
+				"type": "string"
+			},
+			{
+				"name": "_distanceCovered",
+				"type": "uint32"
+			},
+			{
+				"name": "_transportationMode",
+				"type": "string"
+			},
+			{
+				"name": "_vehicleWeight",
+				"type": "uint32"
+			},
+			{
+				"name": "_numberOfVehicles",
+				"type": "uint32"
+			},
+			{
+				"name": "_cargoWeight",
+				"type": "uint32"
+			}
+		],
+		"name": "input_SourceProcure",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "numberOfVehicles",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "unitsOfElectricity1",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "distanceCovered1",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "modeOfTransportInComumute1",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "CCValue_PurchasedCC",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "typeOfPowerUsed",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "purchasedQuantityOfCredit",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "CCValue_Elect",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "noOfVehiclesInProduct",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "typeOfEnergy1",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "typeOfTravel",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "totalDistanceTravelled1",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "weightOfCargoInProduct1",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_unitsOfElectricity",
+				"type": "uint32"
+			},
+			{
+				"name": "_typeOfEnergy",
+				"type": "string"
+			}
+		],
+		"name": "input_Elect",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "orgName1",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "CCValue_PurchasedGas",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "weightOfCargoInProduct",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "distanceCovered",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "unitsOfElectricity",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "totalDistanceTravelled",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "modeOfTransportInProduct",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "transportationMode1",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "transportationMode",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "vehicleWeight1",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "noOfVehiclesInProduct1",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "typeOfGasPurchased",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "CCValue_SP",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "typeOfPowerUsed1",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "CCValue_EmployeeCommu",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "numberOfVehicles1",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_typeOfPowerUsed",
+				"type": "string"
+			},
+			{
+				"name": "_purchasedQuantityOfCredit",
+				"type": "uint32"
+			}
+		],
+		"name": "input_GreenPowerOffset",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "weightOfVehiclesInProduct1",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_enterTotalDistanceCovered",
+				"type": "uint32"
+			},
+			{
+				"name": "_modeOfTransportInProduct",
+				"type": "string"
+			},
+			{
+				"name": "_weightOfVehiclesInProduct",
+				"type": "uint32"
+			},
+			{
+				"name": "_noOfVehiclesInProduct",
+				"type": "uint32"
+			},
+			{
+				"name": "_weightOfCargoInProduct",
+				"type": "uint32"
+			}
+		],
+		"name": "input_productTrans",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "organisationName",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getCarbonCredits",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_typeOfGasPurchased",
+				"type": "string"
+			},
+			{
+				"name": "_enterQuantityPurchasedInGases",
+				"type": "uint32"
+			}
+		],
+		"name": "input_purchasedGas",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "vehicleWeight",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	}
+];
+    
+    
+        $('#balance').click(function(){
+            
+            contract = new WEB3.eth.Contract(abi, address);
+    
+            contract.methods.getCarbonCredits().call().then(function(bal){
+                $('#carboncreditsconsumed').html(bal);
+            })
+        })
+    
+        //Sourcing and Procurement Submit Button
+        $('#submit1').click(function(){
+            var organisationName = document.getElementById("organisationName").value;
+            var transportationMode = document.getElementById("transportationMode").value;
+            distanceCovered = parseInt($('#distanceCovered').val());
+            vehicleWeight = parseInt($('#vehicleWeight').val());
+            numberOfVehicles = parseInt($('#numberOfVehicles').val());
+            cargoWeight = parseInt($('#cargoWeight').val());
+    
+            WEB3.eth.getAccounts().then(function(accounts){
+                var acc = accounts[0];
+                return contract.methods.input_SourceProcure(organisationName, distanceCovered, transportationMode, vehicleWeight, numberOfVehicles, cargoWeight).send({from: acc});
+            }).then(function(tx){
+                console.log(tx);
+            }).catch(function(tx){
+                console.log(tx);
+            })
+        })
+    
+        //Electricity
+        $('#submit2').click(function(){
+            unitsOfElectricity = parseInt($('#unitsOfElectricity').val());
+            var typeOfEnergy = document.getElementById("typeOfEnergy").value;
+            
+            WEB3.eth.getAccounts().then(function(accounts){
+                var acc = accounts[0];
+                return contract.methods.input_Elect(unitsOfElectricity, typeOfEnergy).send({from: acc});
+            }).then(function(tx){
+                console.log(tx);
+            }).catch(function(tx){
+                console.log(tx);
+            })
+            
+        })
+    
+        //Employee Commutte
+        $('#submit3').click(function(){
+            var typeOfTravel = document.getElementById("typeOfTravel").value;
+            var modeOfTransportInComumute = document.getElementById("modeOfTransportInComumute").value;
+            totalDistanceTravelled = parseInt($('#totalDistanceTravelled').val());
+            
+            WEB3.eth.getAccounts().then(function(accounts){
+                var acc = accounts[0];
+                return contract.methods.input_EmployeeComm(typeOfTravel, modeOfTransportInComumute, totalDistanceTravelled).send({from: acc});
+            }).then(function(tx){
+                console.log(tx);
+            }).catch(function(tx){
+                console.log(tx);
+            })
+            
+        })
+    
+    
+        //Product Transport
+        $('#submit4').click(function(){
+            enterTotalDistanceCovered = parseInt($('#enterTotalDistanceCovered').val());
+            var modeOfTransportInProduct = document.getElementById("modeOfTransportInProduct").value;
+            weightOfVehiclesInProduct = parseInt($('#weightOfVehiclesInProduct').val());
+            noOfVehiclesInProduct = parseInt($('#noOfVehiclesInProduct').val());
+            weightOfCargoInProduct = parseInt($('#weightOfCargoInProduct').val());
+            
+            WEB3.eth.getAccounts().then(function(accounts){
+                var acc = accounts[0];
+                return contract.methods.input_productTrans(enterTotalDistanceCovered, modeOfTransportInProduct, weightOfVehiclesInProduct, noOfVehiclesInProduct, weightOfCargoInProduct).send({from: acc});
+            }).then(function(tx){
+                console.log(tx);
+            }).catch(function(tx){
+                console.log(tx);
+            })
+            
+        })
+    
+        //Purchased Gases
+        $('#submit5').click(function(){
+            var typeOfGasPurchased = document.getElementById("typeOfGasPurchased").value;
+            enterQuantityPurchasedInGases = parseInt($('#enterQuantityPurchasedInGases').val());
+            
+            WEB3.eth.getAccounts().then(function(accounts){
+                var acc = accounts[0];
+                return contract.methods.input_purchasedGas(typeOfGasPurchased, enterQuantityPurchasedInGases).send({from: acc});
+            }).then(function(tx){
+                console.log(tx);
+            }).catch(function(tx){
+                console.log(tx);
+            })
+            
+        })
+    
+        //REC/Greenpower Offset
+        $('#submit6').click(function(){
+            var typeOfPowerUsed = document.getElementById("typeOfPowerUsed").value;
+            purchasedQuantityOfCredit = parseInt($('#purchasedQuantityOfCredit').val());
+            
+            WEB3.eth.getAccounts().then(function(accounts){
+                var acc = accounts[0];
+                return contract.methods.input_GreenPowerOffset(typeOfPowerUsed, purchasedQuantityOfCredit).send({from: acc});
+            }).then(function(tx){
+                console.log(tx);
+            }).catch(function(tx){
+                console.log(tx);
+            })
+            
+        })
+    
+        $('#submit7').click(function(){
+            
+            $('#getcontractaddress1').html(address);
+            
+        })
+    
+        $('#submit123').click(function(){
+            //owneraddress1
+    
+            // WEB3.eth.getAccounts().then(function(accounts){
+            // 	var acc = accounts[0];
+            // }).then(function(acc){
+            // 	$('#getcontractaddress1').html(acc);
+            // }).catch(function(acc){
+            // 	console.log(acc);
+            // })
+    
+            WEB3.eth.getAccounts().then(function(accounts){
+                var acc = accounts[0];
+                return acc;
+            }).then(function(tx){
+                document.getElementById("owneraddress1").innerHTML = tx;
+                //$('#getcontractaddress1').html(tx);
+            }).catch(function(tx){
+                console.log(tx);
+            })
+        })
+    
+        $('#submit456').click(function(){
+            //owneraddress1
+    
+            // WEB3.eth.getAccounts().then(function(accounts){
+            // 	var acc = accounts[0];
+            // }).then(function(acc){
+            // 	$('#getcontractaddress1').html(acc);
+            // }).catch(function(acc){
+            // 	console.log(acc);
+            // })
+            
+            WEB3.eth.getAccounts().then(function(accounts){
+                var acc = accounts[0];
+                return (WEB3.eth.getBalance(acc));
+            }).then(function(tx){
+                document.getElementById("ownerbalance1").innerHTML = tx;
+                //$('#getcontractaddress1').html(tx);
+            }).catch(function(tx){
+                console.log(tx);
+            })
+        })
+    })
+    </script>
+    
+    <script>
+        // Accordion 
+        function myAccFunc() {
+          var x = document.getElementById("demoAcc");
+          if (x.className.indexOf("w3-show") == -1) {
+            x.className += " w3-show";
+          } else {
+            x.className = x.className.replace(" w3-show", "");
+          }
+        }
+        
+        // Click on the "Jeans" link on page load to open the accordion for demo purposes
+        document.getElementById("myBtn").click();
+        
+        
+        // Open and close sidebar
+        function w3_open() {
+          document.getElementById("mySidebar").style.display = "block";
+          document.getElementById("myOverlay").style.display = "block";
+        }
+         
+        function w3_close() {
+          document.getElementById("mySidebar").style.display = "none";
+          document.getElementById("myOverlay").style.display = "none";
+        }
+        </script>
+    
+</body>
+</html>
