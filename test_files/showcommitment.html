@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Verfication</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+</head>
+<body>
+
+<!-- Header -->
+<header class="w3-container w3-theme w3-padding" id="myHeader">
+  <i onclick="w3_open()" class="fa fa-bars w3-xlarge w3-button w3-theme"></i> 
+  <div class="w3-center">
+  <h1>VERIFY THE DETAILS WITH CONTRACT ADDRESS</h1>
+  <br>
+  <p>Enter Address:</p> <input type="text" id="enter_address">
+  </div>
+</header>
+
+<div class="w3-container w3-center w3-padding-24">
+	<button id="getCommitmentMsg">Get That Fucking Commitment Message Content</button>
+	<p id="commitmentmsg">_______</p>
+</div>
+
+<div class="w3-container w3-center w3-padding-24">
+	<button id="getCommitmentDate">Get Commitment Date</button>
+	<p id="commitmentdate">_______</p>
+</div>
+
+
+<!-- Script to output all values for verification from blockchain-->
+<script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.36/dist/web3.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin=""anonymous"></script>
+
+
+<script>
+
+$(document).ready(function(){
+
+	WEB3 = new Web3(web3.currentProvider);
+
+	var address = document.getElementById("enter_address").value;
+
+	var abi = [
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getAccountAddress",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "commitment",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getCommitment",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "dateofCommitment",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getDateofCommitment",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "owner",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"name": "_owner",
+				"type": "address"
+			},
+			{
+				"name": "_commitment",
+				"type": "string"
+			},
+			{
+				"name": "_dateofCommitment",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	}
+];
+
+
+	contract1 = new WEB3.eth.Contract(abi, address);
+
+//Get Commitment
+$('#getCommitmentMsg').click(function(){
+	
+
+    contract1 = new WEB3.eth.Contract(abi, address);
+
+    contract1.methods.getCommitment().call().then(function(commitment){
+        $('#commitmentmsg').html(commitment);
+    })
+})
+
+//Get Commitment
+$('#getCommitmentDate').click(function(){
+	
+
+    contract1 = new WEB3.eth.Contract(abi, address);
+
+    contract1.methods.getDateofCommitment().call().then(function(commitmentDate){
+        $('#commitmentdate').html(commitmentDate);
+    })
+})
+
+</script>
+
+</body>
+</html>
